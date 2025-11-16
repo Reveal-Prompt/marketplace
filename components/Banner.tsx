@@ -8,7 +8,7 @@ export function Banner() {
       initial={{ opacity: 0, y: -30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="relative w-[99%] h-[500px] rounded-3xl bg-linear-to-br from-[#FFD4F0] via-[#FFE5CC] to-[#D4C5FF] mx-auto mb-8 shadow-[0_20px_100px_rgba(155,124,255,0.3)] overflow-hidden"
+      className="relative mt-2 w-[99%] h-[500px] rounded-3xl bg-linear-to-br from-[#FFD4F0] via-[#FFE5CC] to-[#D4C5FF] mx-auto mb-8 shadow-[0_20px_100px_rgba(155,124,255,0.3)] overflow-hidden"
     >
       {/* Animated gradient orbs */}
       <motion.div 
@@ -79,16 +79,7 @@ export function Banner() {
             Discover, share, and trade premium AI prompts. Your gateway to cutting-edge AI creativity.
           </motion.p>
 
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.6 }}
-            whileHover={{ scale: 1.05, boxShadow: "0 10px 40px rgba(106, 91, 255, 0.4)" }}
-            whileTap={{ scale: 0.95 }}
-            className="mt-8 px-8 py-3.5 bg-linear-to-r from-[#6A5BFF] to-[#9B7CFF] text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-          >
-            Explore Prompts
-          </motion.button>
+          
         </motion.div>
 
         {/* Right Character Image */}

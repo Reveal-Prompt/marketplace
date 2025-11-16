@@ -9,9 +9,7 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <div>
-      {/* <NavBar /> */}
-      {/* Banner */}
-      
+     
       {/* <SearchSection /> */}
       <div className="w-full flex justify-center py-8">
         <div className=" w-full max-w-2xl">

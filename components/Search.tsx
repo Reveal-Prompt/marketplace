@@ -76,7 +76,7 @@ export default function Search({placeholder} : {placeholder: string}) {
 
                 {/* Focus ring effect */}
                 <div className={`
-                    absolute inset-0 rounded-xl bg-gradient-to-r 
+                    absolute inset-0 rounded-xl bg-linear-to-r 
                     from-purple-500 to-pink-500 -z-10
                     transition-opacity duration-300
                     ${isFocused ? 'opacity-10 blur-xl' : 'opacity-0'}

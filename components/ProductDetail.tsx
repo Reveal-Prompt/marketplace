@@ -71,7 +71,7 @@ export default function ProductDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-purple-50/30 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-purple-50/30 flex items-center justify-center">
         <div className="relative">
           <div className="w-16 h-16 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin"></div>
           <div className="absolute inset-0 w-16 h-16 border-4 border-transparent border-b-pink-600 rounded-full animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
@@ -82,7 +82,7 @@ export default function ProductDetail() {
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-purple-50/30 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-purple-50/30 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Product Not Found
@@ -92,7 +92,7 @@ export default function ProductDetail() {
           </p>
           <button 
             onClick={() => router.push('/')}
-            className="px-6 py-3 bg-gradient-to-r from-[#6A5BFF] to-[#9B7CFF] text-white rounded-xl font-semibold hover:shadow-lg transition-all"
+            className="px-6 py-3 bg-linear-to-r from-[#6A5BFF] to-[#9B7CFF] text-white rounded-xl font-semibold hover:shadow-lg transition-all"
           >
             Back to Marketplace
           </button>
@@ -129,7 +129,7 @@ export default function ProductDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-purple-50/30">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 to-purple-50/30">
       {/* Back Button */}
       <div className="max-w-7xl mx-auto px-4 py-6">
         <motion.button
@@ -154,7 +154,7 @@ export default function ProductDetail() {
             transition={{ duration: 0.6 }}
           >
             {/* Main Image */}
-            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-purple-100 to-pink-100 shadow-2xl mb-4">
+            <div className="relative rounded-3xl overflow-hidden bg-linear-to-br from-purple-100 to-pink-100 shadow-2xl mb-4">
               <img
                 src={images[selectedImage]}
                 alt={currentProduct.title}
@@ -196,7 +196,7 @@ export default function ProductDetail() {
 
             {/* Price */}
             <div className="flex items-baseline gap-3 mb-8">
-              <span className="text-5xl font-bold bg-gradient-to-r from-[#6A5BFF] to-[#FF77E9] bg-clip-text text-transparent">
+              <span className="text-5xl font-bold bg-linear-to-r from-[#6A5BFF] to-[#FF77E9] bg-clip-text text-transparent">
                 ${currentProduct.price}
               </span>
              
@@ -213,7 +213,7 @@ export default function ProductDetail() {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="flex-1 bg-gradient-to-r from-[#6A5BFF] to-[#9B7CFF] text-white py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-2xl hover:shadow-purple-500/50 transition-all flex items-center justify-center gap-2"
+                className="flex-1 bg-linear-to-r from-[#6A5BFF] to-[#9B7CFF] text-white py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-2xl hover:shadow-purple-500/50 transition-all flex items-center justify-center gap-2"
               >
                 <ShoppingCart size={22} />
                 Add to Cart

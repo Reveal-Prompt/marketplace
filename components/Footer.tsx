@@ -205,7 +205,7 @@ export default function Footer() {
       </div>
 
       {/* Decorative gradient line at top */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#6A5BFF] via-[#FF77E9] to-[#6A5BFF]"></div>
+      <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-[#6A5BFF] via-[#FF77E9] to-[#6A5BFF]"></div>
     </footer>
   );
 }
