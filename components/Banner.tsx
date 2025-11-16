@@ -101,7 +101,7 @@ export function Banner() {
             className="relative"
           >
             <motion.img
-              src="/hero-img-3.png"
+              src="/assets/characters/hero-img-3.png"
               alt="AI Astronaut"
               className="h-[420px] w-auto object-contain drop-shadow-[0_25px_50px_rgba(155,124,255,0.5)]"
               whileHover={{ scale: 1.05, rotate: 2 }}

@@ -18,7 +18,7 @@ export default function ProductList() {
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const categories = ["All", "Marketing", "Development", "Design", "Writing", "Business"];
+  const categories = ["All", "Landscape", "Sci-Fi", "Fantasy", "Writing", "Business"];
 
   useEffect(() => {
     axios.get("/dataset.json")

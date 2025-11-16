@@ -15,7 +15,7 @@ export default function NavBar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <Image src="/logo-white.png" alt="Logo" width={250} height={40} />
+            <Image src="/assets/logo/logo-white.png" alt="Logo" width={250} height={40} />
           </div>
          <CartSidebar />
         </div>
