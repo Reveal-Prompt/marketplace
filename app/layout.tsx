@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Sora } from "next/font/google";
 
 import "./globals.css";
+import { Banner } from "@/components/Banner";
 
 const geistSans = Sora({
   subsets: ["latin"],
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
+        <Banner/>
         {children}
       </body>
     </html>

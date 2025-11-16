@@ -1,12 +1,13 @@
 {
   "dataset_name": "ai_image_prompt_collection_v1",
-  "version": "1.1",
+  "version": "1.2",
   "prompts": [
     {
       "id": 1,
       "title": "Realistic Portrait",
       "price": "4.99",
       "category": "Realistic Photography",
+      "description": "Ultra-realistic portrait of a South Asian woman in soft natural light, 85mm lens, bokeh background, subtle makeup, cinematic color grading.",
       "prompt": "Ultra-realistic portrait of a South Asian woman in soft natural light, 85mm lens, bokeh background, subtle makeup, cinematic color grading.",
       "expected_image": "A detailed human portrait with shallow depth of field and soft lighting.",
       "image": "https://picsum.photos/seed/portrait1/600/800"
@@ -16,6 +17,7 @@
       "title": "Tokyo Night Street",
       "price": "3.99",
       "category": "Realistic Photography",
+      "description": "Rainy Tokyo street at night, neon reflections on wet pavement, crowd with umbrellas, captured with a 35mm lens.",
       "prompt": "Rainy Tokyo street at night, neon reflections on wet pavement, crowd with umbrellas, captured with a 35mm lens.",
       "expected_image": "Night street with neon cyberpunk aesthetic and reflections.",
       "image": "https://picsum.photos/seed/tokyo2/600/800"
@@ -25,6 +27,7 @@
       "title": "Sushi Table Shot",
       "price": "2.99",
       "category": "Realistic Photography",
+      "description": "Top-down shot of a wooden table with a sushi platter, natural diffuse lighting, shallow depth of field, crisp textures.",
       "prompt": "Top-down shot of a wooden table with a sushi platter, natural diffuse lighting, shallow depth of field, crisp textures.",
       "expected_image": "Professional food photography setup with sushi platter.",
       "image": "https://picsum.photos/seed/sushi3/600/800"
@@ -34,6 +37,7 @@
       "title": "Red Dragon Fantasy",
       "price": "5.99",
       "category": "Fantasy",
+      "description": "Gigantic red dragon perched on a cliff during sunset, hyper-detailed scales, cinematic lighting, fantasy artwork.",
       "prompt": "Gigantic red dragon perched on a cliff during sunset, hyper-detailed scales, cinematic lighting, fantasy artwork.",
       "expected_image": "Epic dragon in a fantasy sunset environment.",
       "image": "https://picsum.photos/seed/dragon4/600/800"
@@ -43,6 +47,7 @@
       "title": "Sci-Fi Space Station",
       "price": "4.49",
       "category": "Sci-Fi",
+      "description": "Futuristic space station corridor illuminated with blue LED strips, metallic textures, astronauts walking.",
       "prompt": "Futuristic space station corridor illuminated with blue LED strips, metallic textures, astronauts walking.",
       "expected_image": "Sleek sci-fi corridor environment.",
       "image": "https://picsum.photos/seed/scifi5/600/800"
@@ -52,6 +57,7 @@
       "title": "Enchanted Forest",
       "price": "3.49",
       "category": "Fantasy",
+      "description": "Enchanted forest with glowing mushrooms, floating magical particles, teal-purple color palette, fantasy matte painting.",
       "prompt": "Enchanted forest with glowing mushrooms, floating magical particles, teal-purple color palette, fantasy matte painting.",
       "expected_image": "Mystical colorful forest scene.",
       "image": "https://picsum.photos/seed/forest6/600/800"
@@ -61,6 +67,7 @@
       "title": "Headphone Product Render",
       "price": "2.49",
       "category": "Product Photography",
+      "description": "Matte-black wireless headphone floating above a white background, soft shadow, studio lighting.",
       "prompt": "Matte-black wireless headphone floating above a white background, soft shadow, studio lighting.",
       "expected_image": "Minimalist floating product render.",
       "image": "https://picsum.photos/seed/headphone7/600/800"
@@ -70,6 +77,7 @@
       "title": "Luxury Perfume Shot",
       "price": "3.49",
       "category": "Branding",
+      "description": "Luxury perfume bottle on reflective marble surface, golden ambient lighting, elegant composition.",
       "prompt": "Luxury perfume bottle on reflective marble surface, golden ambient lighting, elegant composition.",
       "expected_image": "Premium advertisement-style perfume image.",
       "image": "https://picsum.photos/seed/perfume8/600/800"
@@ -79,6 +87,7 @@
       "title": "Golden Hour Mountains",
       "price": "4.99",
       "category": "Landscape",
+      "description": "Snow-covered mountain range during golden hour, soft orange glow hitting the peaks, ultra-wide shot.",
       "prompt": "Snow-covered mountain range during golden hour, soft orange glow hitting the peaks, ultra-wide shot.",
       "expected_image": "Warm scenic mountain landscape.",
       "image": "https://picsum.photos/seed/mountain9/600/800"
@@ -88,6 +97,7 @@
       "title": "Tropical Sunrise Beach",
       "price": "3.99",
       "category": "Landscape",
+      "description": "Tropical beach with turquoise water, palm trees, colorful sunrise sky, captured in 4K UHD.",
       "prompt": "Tropical beach with turquoise water, palm trees, colorful sunrise sky, captured in 4K UHD.",
       "expected_image": "Relaxing tropical beach sunrise.",
       "image": "https://picsum.photos/seed/beach10/600/800"

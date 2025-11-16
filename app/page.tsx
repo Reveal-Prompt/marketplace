@@ -11,9 +11,6 @@ export default function Home() {
     <div>
       {/* <NavBar /> */}
       {/* Banner */}
-      <div className=" mt-2">
-        <Banner/>
-      </div>
       
       {/* <SearchSection /> */}
       <div className="w-full flex justify-center py-8">

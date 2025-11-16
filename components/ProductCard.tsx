@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { ShoppingCart, Heart, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface ProductCardProps {
+  id: number;
   image: string;
   title: string;
   price: string;
@@ -11,6 +13,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ 
+  id,
   image, 
   title, 
   price, 
@@ -49,7 +52,8 @@ export default function ProductCard({
         </Button>
 
         {/* Image Section */}
-        <div className="relative h-72 overflow-hidden">
+        <Link href={`/products/${id}`}>
+             <div className="relative h-72 overflow-hidden">
           {!isImageLoaded && (
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-10 h-10 border-4 border-purple-300 border-t-purple-600 rounded-full animate-spin" />
@@ -67,6 +71,8 @@ export default function ProductCard({
             `}
           />
         </div>
+</Link>
+       
 
         {/* Hover Overlay */}
         <div
@@ -82,7 +88,8 @@ export default function ProductCard({
           <div className="flex items-center gap-2">
 
             {/* View Details Button (shadcn) */}
-            <Button
+            <Link href={`/products/${id}`} className="flex-1">
+  <Button
               className="
                 flex-1 bg-white/95 backdrop-blur-sm rounded-xl px-4 py-2.5
                 text-gray-900 font-semibold flex items-center justify-between
@@ -94,6 +101,9 @@ export default function ProductCard({
               <span>View Details</span>
               <Eye size={18} />
             </Button>
+
+</Link>
+            
 
             {/* Shopping Cart Button (shadcn) */}
             <Button 

@@ -126,6 +126,7 @@ export default function ProductList() {
             filteredProducts.map((item) => (
               <motion.div key={item.id} >
                 <ProductCard
+                id={item.id}
                   image={item.image}
                   title={item.title}
                   price={item.price}
