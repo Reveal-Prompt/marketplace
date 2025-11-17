@@ -1,0 +1,30 @@
+{
+  "dataset_name": "ai_prompt_tools_v1",
+  "version": "1.1",
+  "tools": [
+    {
+      "id": 1,
+      "name": "Reverse Prompt Generator",
+      "type": "reverse_prompt",
+      "description": "Reconstructs the closest possible original prompt from an image, text output, or generated content.",
+      "image": "/assets/tools/counter-bg.jpg",
+      "optimized_prompt": "Given an image or output, generate the most accurate possible reconstruction of the original prompt. Identify subjects, style, lighting, composition, colors, mood, camera details, and special effects. Provide a clean, single-line prompt optimized for text-to-image models."
+    },
+    {
+      "id": 2,
+      "name": "Prompt Optimizer",
+      "type": "prompt_optimizer",
+      "description": "Enhances a rough user prompt into a clean, detailed, and model-optimized version while preserving the original intent.",
+      "image": "/assets/tools/counter-bg.jpg",
+      "optimized_prompt": "Take the user prompt and optimize it for clarity, detail, and output quality. Enhance structure, add missing technical details, and ensure the final prompt is concise, high-impact, and model-friendly."
+    },
+    {
+      "id": 3,
+      "name": "Style Extractor",
+      "type": "style_extractor",
+      "description": "Extracts the artistic style, visual identity, and rendering characteristics from an image or text prompt.",
+     "image": "/assets/tools/counter-bg.jpg",
+      "optimized_prompt": "Analyze the given image or text and extract its visual style, including color palette, rendering method, medium, textures, mood, and artistic influences. Output a reusable style signature block that can be applied to new prompts."
+    }
+  ]
+}

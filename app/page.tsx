@@ -1,10 +1,7 @@
 
 import Search from "@/components/Search";
-import ProductCard from "../components/ProductCard";
-import NavBar from "@/components/Navbar";
-import { Banner } from "@/components/Banner";
-import ProductList from "@/components/ProductList";
-import Footer from "@/components/Footer";
+import CardList from "@/components/CardList";
+
 
 export default function Home() {
   return (
@@ -18,7 +15,12 @@ export default function Home() {
       </div>
         
       <div className="flex justify-center w-full ">
-  <ProductList/>
+      <CardList 
+  type="products"
+  dataUrl="/dataset.json"
+  title="Featured Prompts"
+  subtitle="Discover premium AI prompts crafted by experts"
+/>
 </div>
 
     
