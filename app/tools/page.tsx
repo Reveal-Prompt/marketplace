@@ -1,6 +1,6 @@
-import Card from "@/components/Card";
-import CardList from "@/components/CardList";
-import ReviewSection from "@/components/ReviewSection";
+import Card from "@/components/ui/Card";
+import CardList from "@/components/features/CardList";
+import ReviewSection from "@/components/sections/ReviewSection";
 
 
 export default function ToolPage() {

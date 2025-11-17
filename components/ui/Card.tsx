@@ -34,13 +34,13 @@ export default function Card(props: CardProps) {
   const id = props.id;
   const image = props.image;
   const displayTitle = isProduct ? props.title : props.toolname;
-  const linkHref = isProduct ? `/products/${id}` : `/tools/${id}`;
+  const linkHref = isProduct ? `/products/${id}` : `/tools/${props.toolname}`;
   const price = isProduct ? props.price : "";
 
   return (
     <div className="w-full group">
-      {/* Card Container */}
-      <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-100 to-pink-100 shadow-md hover:shadow-2xl transition-all duration-500">
+        <Link href={linkHref}>
+        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-100 to-pink-100 shadow-md hover:shadow-2xl transition-all duration-500">
 
         {/* Favorite Button */}
        
@@ -120,12 +120,19 @@ export default function Card(props: CardProps) {
           )}
         </div>
       </div>
+        </Link>
+      {/* Card Container */}
+      
 
       {/* Card Info */}
       <div className="mt-4 px-1">
-        <h3 className="font-bold text-lg text-gray-900 mb-2 line-clamp-2 group-hover:text-purple-600 transition-colors duration-300">
+
+        <Link href={linkHref}>
+         <h3 className="font-bold text-lg text-gray-900 mb-2 line-clamp-2 group-hover:text-purple-600 transition-colors duration-300">
           {displayTitle}
         </h3>
+        </Link>
+       
 
         {/* Only show price for products */}
         {isProduct && (

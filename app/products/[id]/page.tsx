@@ -1,5 +1,5 @@
-import ProductDetail from "@/components/ProductDetail";
-import ReviewSection from "@/components/ReviewSection";
+import ProductDetail from "@/components/sections/ProductDetail";
+import ReviewSection from "@/components/sections/ReviewSection";
 
 export default function ProductPage() {
   return (

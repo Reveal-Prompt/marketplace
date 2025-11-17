@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { CartSidebar } from "./CartSidebar";
+import { CartSidebar } from "../CartSidebar";
 import Image from "next/image";
 
 

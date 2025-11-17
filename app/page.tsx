@@ -1,6 +1,6 @@
 
-import Search from "@/components/Search";
-import CardList from "@/components/CardList";
+import Search from "@/components/features/search/Search";
+import CardList from "@/components/features/CardList";
 
 
 export default function Home() {

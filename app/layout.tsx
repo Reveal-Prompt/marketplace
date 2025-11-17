@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Sora } from "next/font/google";
 
 import "./globals.css";
-import { Banner } from "@/components/Banner";
+import { Banner } from "@/components/sections/Banner";
 
 const geistSans = Sora({
   subsets: ["latin"],

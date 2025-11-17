@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Card from "./Card";
+import Card from "../ui/Card";
 import { motion } from "framer-motion";
 import PromptPagination from "./PromptPagination";
 import { ArrowLeft } from "lucide-react";
