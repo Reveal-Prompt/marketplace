@@ -33,6 +33,7 @@ interface CardListProps {
   dataUrl: string;
   title?: string;
   subtitle?: string;
+  searchQuery?: string; 
 }
 
 export default function CardList({ 
@@ -66,7 +67,7 @@ export default function CardList({
   const isProduct = (item: CardItem): item is Product => {
     return 'title' in item;
   };
-
+  
   const filteredItems = type === "products" && selectedCategory === "All" 
     ? items 
     : type === "products"
@@ -78,16 +79,17 @@ export default function CardList({
       })
     : items; // For tools, don't filter
 
+
   const handlePageChange = (page: number, pageItems: CardItem[]) => {
     setCurrentPageItems(pageItems);
   };
 
-  // Reset pagination when filtered items change
+
   useEffect(() => {
     setCurrentPageItems([]);
   }, [filteredItems.length, selectedCategory]);
 
-  // Display items: use paginated items if available, otherwise show first page
+
   const displayItems = currentPageItems.length > 0 ? currentPageItems : filteredItems.slice(0, 9);
 
   const containerVariants = {
@@ -105,16 +107,7 @@ export default function CardList({
   return (
     <div className="w-full max-w-7xl mx-auto px-4 py-12">
       <div className="max-w-7xl mx-auto px-4 py-6">
-        <motion.button
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          whileHover={{ x: -5 }}
-          onClick={() => router.back()}
-          className="flex items-center gap-2 text-gray-600 hover:text-purple-600 transition-colors cursor-pointer"
-        >
-          <ArrowLeft size={20} />
-          <span className="font-medium">Back to marketplace</span>
-        </motion.button>
+       
       </div>
       {/* Header Section */}
       <motion.div 
@@ -140,7 +133,7 @@ export default function CardList({
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-8 flex flex-wrap justify-center gap-3"
+          className="mb-8 flex flex-wrap justify-center gap-3 "
         >
           {categories.map((category, index) => (
             <motion.button

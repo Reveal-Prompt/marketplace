@@ -103,7 +103,7 @@ export function Banner({ page = "/" }: BannerProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.0, duration: 0.6 }}
-                className="mt-6 px-6 py-3 bg-black text-white font-semibold rounded-lg shadow-lg hover:bg-purple-700 transition-colors duration-300"
+                className="mt-6 px-6 py-3 bg-black text-white font-semibold rounded-lg shadow-lg hover:bg-gray-600 transition-colors duration-300 cursor-pointer"
               >
                 Tools
               </motion.button>
