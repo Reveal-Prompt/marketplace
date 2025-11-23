@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import NavBar from "../features/layout/Navbar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 
 interface BannerProps {
   page?: string;
@@ -17,8 +16,7 @@ export function Banner({ page = "/" }: BannerProps) {
     <motion.div
       initial={{ height: 500, opacity: 1 }}
       animate={{
-        height: isNotMarketPlace ? 600 : 90 ,
-      
+        height: isNotMarketPlace ? 600 : 90,
       }}
       transition={{ duration: 0.8, ease: "easeInOut" }}
       className="relative w-[99%] mx-auto rounded-3xl overflow-hidden bg-linear-to-br from-[#FFD4F0] via-[#FFE5CC] to-[#D4C5FF] shadow-[0_20px_100px_rgba(155,124,255,0.3)]"
@@ -60,15 +58,15 @@ export function Banner({ page = "/" }: BannerProps) {
         <NavBar />
       </div>
 
-      {/* Main Banner Content - Hidden on /tools */}
+      {/* Main Banner Content */}
       {isNotMarketPlace && (
-        <div className="absolute inset-0 flex items-center justify-between px-16 z-10">
+        <div className="absolute inset-0 grid grid-cols-2 items-center gap-10 px-20 z-10">
           {/* Left Content */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-            className="flex flex-col items-start max-w-xl"
+            className="flex flex-col items-start max-w-lg"
           >
             <motion.h1
               className="text-7xl font-bold tracking-tight mb-2"
@@ -83,7 +81,7 @@ export function Banner({ page = "/" }: BannerProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className=" text-7xl font-bold mb-6"
+              className="text-7xl font-bold mb-6"
             >
               Marketplace
             </motion.div>
@@ -103,39 +101,28 @@ export function Banner({ page = "/" }: BannerProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.0, duration: 0.6 }}
-                className="mt-6 px-6 py-3 bg-black text-white font-semibold rounded-lg shadow-lg hover:bg-gray-600 transition-colors duration-300 cursor-pointer"
+                className="mt-6 px-6 py-3 bg-black text-white font-semibold rounded-lg shadow-lg hover:bg-gray-700 transition-colors duration-300 cursor-pointer"
               >
-                Tools
+                Explore &gt;
               </motion.button>
             </Link>
           </motion.div>
 
           {/* Right Character Image */}
           <motion.div
-            initial={{ opacity: 0, x: 100, scale: 0.8 }}
+            initial={{ opacity: 0, x: 40, scale: 0.9 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-            className="relative"
+            className="flex justify-center"
           >
-            <motion.div
-              animate={{
-                y: [0, -20, 0],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="relative"
-            >
-              <motion.img
-                src="/assets/characters/hero-img-3.png"
-                alt="AI Astronaut"
-                className="h-[420px] w-auto object-contain drop-shadow-[0_25px_50px_rgba(155,124,255,0.5)]"
-                whileHover={{ scale: 1.05, rotate: 2 }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.div>
+            <motion.img
+              src="/assets/characters/hero-img-3.png"
+              alt="AI Astronaut"
+              className="h-[430px] w-auto object-contain drop-shadow-[0_25px_50px_rgba(155,124,255,0.5)]"
+              animate={{ y: [0, -15, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              whileHover={{ scale: 1.05, rotate: 2 }}
+            />
           </motion.div>
         </div>
       )}
@@ -148,6 +135,7 @@ export function Banner({ page = "/" }: BannerProps) {
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
             className="absolute top-20 left-1/4 w-12 h-12 border-2 border-[#FF77E9]/30 rounded-lg"
           />
+
           <motion.div
             animate={{ rotate: -360 }}
             transition={{ duration: 15, repeat: Infinity, ease: "linear" }}

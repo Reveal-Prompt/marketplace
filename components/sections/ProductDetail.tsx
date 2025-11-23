@@ -4,28 +4,23 @@ import { useRouter, useParams } from "next/navigation";
 import axios from "axios";
 import { motion } from "framer-motion";
 import {
-  ShoppingCart,
-
-  Share2,
-  Star,
   Check,
   Copy,
-  Download,
-  Shield,
   Zap,
-  Users,
-  TrendingUp,
   ArrowLeft
 } from "lucide-react";
 import Image from "next/image";
 interface Product {
-  id: number;
-  title: string;
-  price: string;
-  image: string;
+  _id: number;
+ image: {
+    type: string;
+    format: string;
+    base64: string;
+  };
   category: string;
-  description?: string;
-  prompt: string;
+  image_description: string;
+  short_prompt: string;
+  long_prompt: string;
   rating?: number;
   reviews?: number;
   sales?: number;
@@ -44,28 +39,26 @@ export default function ProductDetail() {
   const [revealPrompt, setRevealPrompt] = useState(false);
 
   // Fetch product data
-  useEffect(() => {
+ useEffect(() => {
     if (!productId) return;
 
-    axios.get("/dataset.json")
-      .then(res => {
-        const products = res.data.prompts;
-        const foundProduct = products.find((p: Product) => p.id.toString() === productId);
-
-        if (foundProduct) {
-          // Add default values for optional fields
-          setProduct({
-            ...foundProduct,
-            description: foundProduct.description || "Premium AI prompt designed for optimal results. Perfect for professionals looking to enhance their workflow.",
-            rating: foundProduct.rating || 4.9,
-            reviews: foundProduct.reviews || 342,
-            sales: foundProduct.sales || 1250
-          });
-        }
+    axios
+      .get(`http://localhost:8080/api/prompts/${productId}`)
+      .then((response) => {
+        setProduct({
+          ...response.data,
+          description:
+            response.data.description ||
+            "Premium AI prompt designed for optimal results. Perfect for professionals looking to enhance their workflow.",
+          rating: response.data.rating || 4.9,
+          reviews: response.data.reviews || 342,
+          sales: response.data.sales || 1250,
+        });
         setLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Error fetching product:", err);
+  
         setLoading(false);
       });
   }, [productId]);
@@ -107,7 +100,7 @@ export default function ProductDetail() {
 
 
   const handleCopyPrompt = () => {
-    navigator.clipboard.writeText(currentProduct.prompt);
+    navigator.clipboard.writeText(currentProduct.short_prompt);
     setCopiedPrompt(true);
     setTimeout(() => setCopiedPrompt(false), 2000);
   };
@@ -139,12 +132,11 @@ export default function ProductDetail() {
           >
             {/* Main Image */}
             <div className="relative rounded-3xl overflow-hidden bg-linear-to-br from-purple-100 to-pink-100 shadow-2xl mb-4">
-              <img
-                src={currentProduct.image}
-                alt={currentProduct.title}
-                className="w-full h-[500px] object-cover"
-              />
-
+            <img
+  src={`data:image/png;base64,${currentProduct.image.base64}`}
+  alt="Product image"
+  className="w-full h-[500px] object-cover"
+/>
 
 
               {/* Action Buttons */}
@@ -174,7 +166,7 @@ export default function ProductDetail() {
           >
             {/* Title & Rating */}
             <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              {currentProduct.title}
+              {currentProduct.short_prompt}
             </h1>
 
 
@@ -182,7 +174,7 @@ export default function ProductDetail() {
 
             {/* Description */}
             <p className="text-gray-700 leading-relaxed mb-8">
-              {currentProduct.description}
+              {currentProduct.image_description}
             </p>
             {/* AI Models Badges */}
             {currentProduct.ai_models && currentProduct.ai_models.length > 0 && (
@@ -201,14 +193,16 @@ export default function ProductDetail() {
             {/* Action Buttons */}
             <div className="flex gap-3 mb-8">
               <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="flex-1 bg-linear-to-br from-[#FFD4F0] via-[#FFE5CC] to-[#D4C5FF] text-white py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-2xl hover:shadow-purple-500/50 transition-all flex items-center justify-center gap-2"
-                onClick={() => setRevealPrompt(true)}
-              >
-
-                <Image src="/assets/logo/logo.png" alt="Buy Now" width={100} height={24} />
-              </motion.button>
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full bg-gradient-to-br from-[#FFD4F0] via-[#FFE5CC] to-[#D4C5FF] text-gray-900 py-4 px-6 rounded-xl font-semibold text-lg shadow-lg hover:shadow-2xl hover:shadow-purple-500/50 transition-all flex items-center justify-center gap-2"
+              onClick={() => setRevealPrompt(true)}
+            >
+            
+              <span className="">
+                Reveal Prompt
+              </span>
+            </motion.button>
 
             </div>
 
@@ -219,7 +213,7 @@ export default function ProductDetail() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[999]"
+                className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-999"
                 onClick={() => setRevealPrompt(false)} // close when clicking outside
               >
                 <motion.div
@@ -266,7 +260,7 @@ export default function ProductDetail() {
                     </div>
 
                     <p className="text-gray-300 text-sm font-mono leading-relaxed whitespace-pre-wrap">
-                      {currentProduct.prompt}
+                      {currentProduct.long_prompt}
                     </p>
                   </div>
                 </motion.div>

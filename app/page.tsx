@@ -17,7 +17,7 @@ export default function Home() {
       <div className="flex justify-center w-full ">
       <CardList 
   type="products"
-  dataUrl="/dataset.json"
+  dataUrl="http://localhost:8080/api/prompts"
   title="Featured Prompts"
   subtitle="Discover premium AI prompts crafted by experts"
 />
