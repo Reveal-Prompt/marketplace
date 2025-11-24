@@ -4,7 +4,7 @@ import Link from "next/link";
 import { CartSidebar } from "../CartSidebar";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-
+import { motion } from "framer-motion";
 
 export default function NavBar() {
 
@@ -26,9 +26,13 @@ export default function NavBar() {
           </Link>
           {/* <CartSidebar /> */}
           <Link href={'/tools'}>
-            <Button className="bg-black text-white font-semibold rounded-lg shadow-lg hover:bg-gray-600 transition-colors duration-300">
-              Tools
-            </Button>
+            <motion.button
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(0,0,0,0.05)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-8 py-3 border-2 border-gray-800 text-gray-900 font-semibold rounded-lg hover:bg-black/5 transition-all duration-300"
+                >
+                  Tools
+                </motion.button>
           </Link>
         </div>
       </div>

@@ -3,6 +3,7 @@ import { Sora } from "next/font/google";
 
 import "./globals.css";
 import { Banner } from "@/components/sections/Banner";
+import Footer from "@/components/features/layout/Footer";
 
 const geistSans = Sora({
   subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({
       >
         <Banner/>
         {children}
+        <Footer/>
       </body>
     </html>
   );
