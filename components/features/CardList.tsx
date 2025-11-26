@@ -138,7 +138,7 @@ export default function CardList({
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 py-12">
+    <div className="w-[90%] max-w-7xl mx-auto px-4 py-12">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}

@@ -9,7 +9,7 @@ interface BannerProps {
   page?: string;
 }
 
-export function Banner({ page = "/" }: BannerProps) {
+export function HeroSection({ page = "/" }: BannerProps) {
   const pathname = usePathname();
   const isNotMarketPlace = pathname === "/";
 
@@ -79,7 +79,7 @@ export function Banner({ page = "/" }: BannerProps) {
       />
 
       {/* Navbar with Logo Background */}
-      <div className="relative z-20 w-full px-8 pt-5">
+      <div className="relative z-20 w-full px-8">
         <NavBar />
       </div>
 
@@ -135,7 +135,7 @@ export function Banner({ page = "/" }: BannerProps) {
                 <motion.button
                   whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(106, 91, 255, 0.4)" }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-3 bg-gradient-to-r from-[#6A5BFF] to-[#9B7CFF] text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="px-8 py-3 bg-linear-to-r from-[#6A5BFF] to-[#9B7CFF] text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   Explore Marketplace →
                 </motion.button>
@@ -152,7 +152,7 @@ export function Banner({ page = "/" }: BannerProps) {
             </motion.div>
 
             {/* Stats */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.0, duration: 0.6 }}
@@ -170,7 +170,7 @@ export function Banner({ page = "/" }: BannerProps) {
                 <p className="text-2xl font-bold text-gray-900">100%</p>
                 <p className="text-sm text-gray-700">Curated Content</p>
               </div>
-            </motion.div>
+            </motion.div> */}
           </motion.div>
 
           {/* Right Visual Section - Floating Prompts */}

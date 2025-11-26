@@ -3,6 +3,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Instagram } from 'lucide-react';
+
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -24,17 +26,11 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative w-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-300 overflow-hidden">
+    <footer className="relative w-full bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-300 overflow-hidden">
       {/* Logo Background with Fade - Covering Whole Footer */}
       <motion.div 
-        animate={{ 
-          opacity: [0.1, 0.12, 0.05]
-        }}
-        transition={{ 
-          duration: 5,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
+        animate={{ opacity: [0.1, 0.12, 0.05] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         className="absolute inset-0 pointer-events-none overflow-hidden"
       >
         <Image 
@@ -48,34 +44,20 @@ export default function Footer() {
 
       {/* Animated background orbs */}
       <motion.div 
-        animate={{ 
-          scale: [1, 1.2, 1],
-          opacity: [0.05, 0.1, 0.05]
-        }}
-        transition={{ 
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
+        animate={{ scale: [1, 1.2, 1], opacity: [0.05, 0.1, 0.05] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-0 left-0 w-96 h-96 bg-[#6A5BFF] rounded-full blur-3xl" 
       />
       <motion.div 
-        animate={{ 
-          scale: [1, 1.3, 1],
-          opacity: [0.05, 0.08, 0.05]
-        }}
-        transition={{ 
-          duration: 12,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2
-        }}
+        animate={{ scale: [1, 1.3, 1], opacity: [0.05, 0.08, 0.05] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#FF77E9] rounded-full blur-3xl" 
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-8 py-16">
         {/* Top Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12 mb-12">
+          
           {/* Brand Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -194,9 +176,6 @@ export default function Footer() {
           </p>
         </motion.div>
       </div>
-
-      {/* Decorative gradient line at top */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#6A5BFF] via-[#FF77E9] to-[#6A5BFF]"></div>
     </footer>
   );
 }
