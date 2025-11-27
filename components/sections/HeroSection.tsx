@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Skeleton } from "@/components/ui/skeleton"; // shadcn/ui Skeleton
 
 interface Prompt {
   _id: number;
@@ -14,8 +15,7 @@ interface Prompt {
     base64: string;
   };
   short_prompt: string;
-  title?: string; // for dummy data fallback
-  imageEmoji?: string; // fallback for dummy data
+  title?: string;
 }
 
 export function HeroSection() {
@@ -30,7 +30,6 @@ export function HeroSection() {
   };
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(4);
   const [items, setItems] = useState<Prompt[]>([]);
 
@@ -52,15 +51,6 @@ export function HeroSection() {
 
     fetchPrompts();
   }, [itemsPerPage]);
-
-  const dummyPrompts: Prompt[] = [
-    { _id: 1, imageEmoji: "🎨", short_prompt: "Epic Fantasy Landscape" },
-    { _id: 2, imageEmoji: "🚀", short_prompt: "Sci-Fi Architecture" },
-    { _id: 3, imageEmoji: "🌌", short_prompt: "Cosmic Nebula" },
-    { _id: 4, imageEmoji: "🏰", short_prompt: "Medieval Castle" },
-  ];
-
-  const displayItems = items.length > 0 ? items : dummyPrompts;
 
   return (
     <motion.div
@@ -95,18 +85,7 @@ export function HeroSection() {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
             className="flex flex-col items-start max-w-xl mx-auto lg:mx-0"
           >
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/30 border border-white/40 backdrop-blur-sm mb-4 sm:mb-6 hover:bg-white/40 transition-all"
-            >
-              <span className="w-2 h-2 bg-[#FF77E9] rounded-full animate-pulse"></span>
-              <span className="text-xs sm:text-sm font-medium text-white">
-                ✨ Powered by Midjourney
-              </span>
-            </motion.div>
+           
 
             <motion.h1
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-3 sm:mb-4 text-gray-900"
@@ -153,92 +132,65 @@ export function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right Visual Section - Desktop */}
+          {/* Right Visual Section */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
             className="relative hidden lg:flex justify-center items-center h-[400px] lg:h-[500px]"
           >
-            {displayItems.map((prompt, index) => {
-              const creator = `Creator${index + 1}`;
-              const imageSrc = prompt.image?.base64
-                ? `data:${prompt.image.type};base64,${prompt.image.base64}`
-                : prompt.imageEmoji || "✨";
-
-              return (
-                <motion.div
-                  key={prompt._id}
-                  initial={{ opacity: 0, y: 50, scale: 0.8 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ delay: 0.5 + index * 0.15, duration: 0.6 }}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  className={`absolute w-56 lg:w-64 bg-white/90 backdrop-blur-xl rounded-2xl p-3 lg:p-4 shadow-2xl border border-white/50 hover:shadow-[0_20px_40px_rgba(106,91,255,0.3)] transition-all cursor-pointer ${
-                    index === 0 ? "top-0 left-0" : ""
-                  } ${index === 1 ? "top-32 right-0" : ""} ${
-                    index === 2 ? "bottom-20 left-12" : ""
-                  } ${index === 3 ? "bottom-0 right-12" : ""}`}
-                >
-                  <div className="w-full h-32 lg:h-36 mb-3 rounded-lg overflow-hidden bg-gray-200 flex items-center justify-center">
-                    {prompt.image?.base64 ? (
-                      <img
-                        src={imageSrc}
-                        alt={prompt.short_prompt}
-                        className="w-full h-full object-cover rounded-lg"
-                      />
-                    ) : (
-                      <span className="text-4xl">{imageSrc}</span>
-                    )}
+            {loading
+              ? Array.from({ length: itemsPerPage }).map((_, index) => (
+                  <div
+                    key={index}
+                    className={`absolute w-56 lg:w-64 rounded-2xl p-3 lg:p-4 ${
+                      index === 0 ? "top-0 left-0" : ""
+                    } ${index === 1 ? "top-32 right-0" : ""} ${
+                      index === 2 ? "bottom-20 left-12" : ""
+                    } ${index === 3 ? "bottom-0 right-12" : ""}`}
+                  >
+                    <Skeleton className="w-full h-36 rounded-lg mb-3" />
+                    <Skeleton className="w-3/4 h-4 rounded mb-1" />
+                    <Skeleton className="w-1/2 h-3 rounded" />
                   </div>
-                  <p className="font-semibold text-gray-900 text-sm lg:text-base truncate mb-1">
-                    {prompt.short_prompt || prompt.title}
-                  </p>
-                  <p className="text-[10px] lg:text-xs text-gray-600">by {creator}</p>
-                </motion.div>
-              );
-            })}
-          </motion.div>
+                ))
+              : items.map((prompt, index) => {
+                  const creator = `Creator${index + 1}`;
+                  const imageSrc = prompt.image?.base64
+                    ? `data:${prompt.image.type};base64,${prompt.image.base64}`
+                    : "✨";
 
-          {/* Mobile version */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="lg:hidden grid grid-cols-2 gap-4 mt-8"
-          >
-            {displayItems.slice(0, 2).map((prompt, index) => {
-              const creator = `Creator${index + 1}`;
-              const imageSrc = prompt.image?.base64
-                ? `data:${prompt.image.type};base64,${prompt.image.base64}`
-                : prompt.imageEmoji || "✨";
-
-              return (
-                <motion.div
-                  key={prompt._id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 + index * 0.1, duration: 0.6 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-white/90 backdrop-blur-xl rounded-xl p-3 shadow-xl border border-white/50"
-                >
-                  <div className="w-full h-24 rounded-lg overflow-hidden bg-gray-200 flex items-center justify-center mb-2">
-                    {prompt.image?.base64 ? (
-                      <img
-                        src={imageSrc}
-                        alt={prompt.short_prompt}
-                        className="w-full h-full object-cover rounded-lg"
-                      />
-                    ) : (
-                      <span className="text-2xl">{imageSrc}</span>
-                    )}
-                  </div>
-                  <p className="font-semibold text-gray-900 text-xs truncate mb-1">
-                    {prompt.short_prompt || prompt.title}
-                  </p>
-                  <p className="text-[10px] text-gray-600">by {creator}</p>
-                </motion.div>
-              );
-            })}
+                  return (
+                    <motion.div
+                      key={prompt._id}
+                      initial={{ opacity: 0, y: 50, scale: 0.8 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{ delay: 0.5 + index * 0.15, duration: 0.6 }}
+                      whileHover={{ scale: 1.05, y: -5 }}
+                      className={`absolute w-56 lg:w-64 bg-white/90 backdrop-blur-xl rounded-2xl p-3 lg:p-4 shadow-2xl border border-white/50 hover:shadow-[0_20px_40px_rgba(106,91,255,0.3)] transition-all cursor-pointer ${
+                        index === 0 ? "top-0 left-0" : ""
+                      } ${index === 1 ? "top-32 right-0" : ""} ${
+                        index === 2 ? "bottom-20 left-12" : ""
+                      } ${index === 3 ? "bottom-0 right-12" : ""}`}
+                    >
+                      <div className="w-full h-36 mb-3 rounded-lg overflow-hidden bg-gray-200 flex items-center justify-center">
+                        {prompt.image?.base64 ? (
+                          <img
+                            src={imageSrc}
+                            alt={prompt.short_prompt}
+                            className="w-full h-full object-cover rounded-lg"
+                          />
+                        ) : (
+                          <span className="text-4xl">{imageSrc}</span>
+                        )}
+                      </div>
+                      <p className="font-semibold text-gray-900 text-sm lg:text-base truncate mb-1">
+                        {prompt.short_prompt || prompt.title}
+                      </p>
+                      <p className="text-[10px] lg:text-xs text-gray-600">by {creator}</p>
+                    </motion.div>
+                  );
+                })}
           </motion.div>
         </div>
       )}

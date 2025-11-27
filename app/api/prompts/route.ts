@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
     
     const baseUrl = process.env.BACKEND_URL || "http://localhost:8080";
     const res = await axios.get(`${baseUrl}/api/prompts?page=${page}&limit=${limit}`);
-    console.log(res)
+    
     return NextResponse.json(res.data, { status: 200 });
   } catch (error: any) {
     return NextResponse.json(

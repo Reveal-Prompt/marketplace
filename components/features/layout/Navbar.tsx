@@ -45,9 +45,9 @@ export default function NavBar() {
             <Image 
               src="/assets/logo/logo.png" 
               alt="Logo" 
-              width={150} 
+              width={100} 
               height={30}
-              className="drop-shadow-lg md:w-[200px] md:h-[40px]"
+              className="drop-shadow-lg md:w-[200px] "
             />
           </motion.div>
         </Link>
