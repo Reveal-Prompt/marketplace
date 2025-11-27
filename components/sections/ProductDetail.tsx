@@ -35,15 +35,15 @@ export default function ProductDetail() {
   const [revealPrompt, setRevealPrompt] = useState(false);
 
   // Fetch product data
-  useEffect(() => {
+ useEffect(() => {
     if (!productId) return;
 
     axios
-      .get(`http://localhost:8080/api/prompts/${productId}`)
+      .get(`/api/prompts/${productId}`)
       .then((response) => {
         setProduct({
           ...response.data,
-          views: response.data.views || 123, // static default for now
+          views: response.data.views || 123,
           rating: response.data.rating || 4.9,
           reviews: response.data.reviews || 342,
           sales: response.data.sales || 1250,
