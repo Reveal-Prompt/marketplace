@@ -20,7 +20,13 @@ export default function NavBar() {
   const isActive = (href: string) => pathname === href;
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
+  
+  const scrollToMarketplace = () => {
+    const marketplaceSection = document.getElementById("marketplace");
+    if (marketplaceSection) {
+      marketplaceSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <nav className="w-full relative z-50">
       <motion.div
@@ -97,8 +103,8 @@ export default function NavBar() {
           whileTap={{ scale: 0.95 }}
           className="hidden md:block"
         >
-          <Link href="/marketplace">
-            <button className="px-6 py-2 bg-gradient-to-r from-[#FF77E9] to-[#FF99CC] text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all backdrop-blur-sm border border-white/20 text-sm">
+          <Link href="/">
+            <button onClick={() => scrollToMarketplace()} className="px-6 py-2 bg-gradient-to-r from-[#FF77E9] to-[#FF99CC] text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all backdrop-blur-sm border border-white/20 text-sm">
               Get Started
             </button>
           </Link>
