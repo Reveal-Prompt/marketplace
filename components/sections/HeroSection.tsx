@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import NavBar from "../features/layout/Navbar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
 
 interface BannerProps {
   page?: string;
@@ -12,6 +11,14 @@ interface BannerProps {
 export function HeroSection({ page = "/" }: BannerProps) {
   const pathname = usePathname();
   const isNotMarketPlace = pathname === "/";
+
+  // Scroll to marketplace function
+  const scrollToMarketplace = () => {
+    const marketplaceSection = document.getElementById("marketplace");
+    if (marketplaceSection) {
+      marketplaceSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   // Dummy prompts data
   const dummyPrompts = [
@@ -131,15 +138,14 @@ export function HeroSection({ page = "/" }: BannerProps) {
               transition={{ delay: 0.8, duration: 0.6 }}
               className="flex gap-4"
             >
-              <Link href={"/"}>
-                <motion.button
-                  whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(106, 91, 255, 0.4)" }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-8 py-3 bg-linear-to-r from-[#6A5BFF] to-[#9B7CFF] text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  Explore Marketplace →
-                </motion.button>
-              </Link>
+              <motion.button
+                onClick={scrollToMarketplace}
+                whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(106, 91, 255, 0.4)" }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-3 bg-linear-to-r from-[#6A5BFF] to-[#9B7CFF] text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                Explore Marketplace →
+              </motion.button>
               <Link href={"/tools"}>
                 <motion.button
                   whileHover={{ scale: 1.05, backgroundColor: "rgba(0,0,0,0.05)" }}
@@ -150,27 +156,6 @@ export function HeroSection({ page = "/" }: BannerProps) {
                 </motion.button>
               </Link>
             </motion.div>
-
-            {/* Stats */}
-            {/* <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.0, duration: 0.6 }}
-              className="flex gap-8 mt-12 pt-8 border-t-2 border-gray-300"
-            >
-              <div>
-                <p className="text-2xl font-bold text-gray-900">5K+</p>
-                <p className="text-sm text-gray-700">Premium Prompts</p>
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-gray-900">10K+</p>
-                <p className="text-sm text-gray-700">Active Users</p>
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-gray-900">100%</p>
-                <p className="text-sm text-gray-700">Curated Content</p>
-              </div>
-            </motion.div> */}
           </motion.div>
 
           {/* Right Visual Section - Floating Prompts */}
@@ -187,8 +172,6 @@ export function HeroSection({ page = "/" }: BannerProps) {
                 initial={{ opacity: 0, y: 50, scale: 0.8 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ delay: 0.5 + index * 0.15, duration: 0.6 }}
-
-              
                 className={`absolute w-64 bg-white/90 backdrop-blur-xl rounded-2xl p-4 shadow-2xl border border-white/50 hover:shadow-[0_20px_40px_rgba(106,91,255,0.3)] transition-all ${
                   index === 0 ? "top-0 left-0" : ""
                 } ${index === 1 ? "top-32 right-0" : ""} ${

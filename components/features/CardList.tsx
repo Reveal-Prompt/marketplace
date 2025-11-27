@@ -5,7 +5,6 @@ import axios from "axios";
 import Card from "../ui/Card";
 import { motion } from "framer-motion";
 import PromptPagination from "./PromptPagination";
-import { useRouter } from "next/navigation";
 import Loading from "../ui/Loading";
 
 interface Product {
@@ -21,35 +20,21 @@ interface Product {
   category: string;
 }
 
-interface Tool {
-  id: number;
-  name: string;
-  toolname: string;
-  description: string;
-  image: string;
-  category?: string;
-}
-
-type CardItem = Product | Tool;
-
 interface CardListProps {
-  type: "products" | "tools";
   dataUrl: string;
   title?: string;
   subtitle?: string;
 }
 
 export default function CardList({
-  type = "products",
   dataUrl,
   title,
   subtitle,
 }: CardListProps) {
-  const [items, setItems] = useState<CardItem[]>([]);
+  const [items, setItems] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [toggleType, setToggleType] = useState<"Midjourney" | "chatgpt">("Midjourney");
-  const [currentPageItems, setCurrentPageItems] = useState<CardItem[]>([]);
-  const router = useRouter();
+  const [currentPageItems, setCurrentPageItems] = useState<Product[]>([]);
 
   useEffect(() => {
     axios
@@ -65,24 +50,7 @@ export default function CardList({
       });
   }, [dataUrl]);
 
-  // Type guards
-  const isProduct = (item: CardItem): item is Product => "image_description" in item;
-  const isTool = (item: CardItem): item is Tool => "toolname" in item;
-
-  // Separate filtering logic for products and tools
-  const getFilteredItems = (): CardItem[] => {
-    if (!items || items.length === 0) return [];
-
-    if (type === "products") {
-      return items.filter(isProduct);
-    } else {
-      return items.filter(isTool);
-    }
-  };
-
-  const filteredItems = getFilteredItems();
-
-  const handlePageChange = (page: number, pageItems: CardItem[]) => {
+  const handlePageChange = (page: number, pageItems: Product[]) => {
     setCurrentPageItems(pageItems);
   };
 
@@ -93,52 +61,17 @@ export default function CardList({
 
   useEffect(() => {
     setCurrentPageItems([]);
-  }, [toggleType, filteredItems.length]);
+  }, [toggleType, items.length]);
 
-  const displayItems = currentPageItems.length > 0 ? currentPageItems : filteredItems.slice(0, 9);
+  const displayItems = currentPageItems.length > 0 ? currentPageItems : items.slice(0, 9);
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
   };
 
-  // Render product card
-  const renderProductCard = (product: Product) => (
-    <motion.div key={product._id}>
-      <Card
-        type="product"
-        _id={product._id}
-        image={product.image}
-        long_prompt={product.long_prompt}
-        short_prompt={product.short_prompt}
-        image_description={product.image_description}
-        category={product.category}
-      />
-    </motion.div>
-  );
-
-  // Render tool card
-  const renderToolCard = (tool: Tool) => (
-    <motion.div key={tool.id}>
-      <Card
-        type="tool"
-        id={tool.id}
-        image={tool.image}
-        toolname={tool.toolname}
-        description={tool.description}
-      />
-    </motion.div>
-  );
-
-  // Render items based on type
-  const renderItems = () => {
-    return displayItems.map((item) =>
-      isProduct(item) ? renderProductCard(item) : renderToolCard(item)
-    );
-  };
-
   return (
-    <div className="w-[90%] max-w-7xl mx-auto px-4 py-12">
+    <div className="w-[90%] max-w-7xl mx-auto px-4 py-12" id="marketplace">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -147,17 +80,14 @@ export default function CardList({
         className="mb-12 text-center"
       >
         <h2 className="text-4xl font-bold text-gray-900 mb-3">
-          {title || (type === "products" ? "Featured Prompts" : "Featured Tools")}
+          {title || "Featured Prompts"}
         </h2>
         <p className="text-gray-600 text-lg">
-          {subtitle ||
-            (type === "products"
-              ? "Discover premium AI prompts crafted by experts"
-              : "Explore powerful AI tools for your projects")}
+          {subtitle || "Discover premium AI prompts crafted by experts"}
         </p>
       </motion.div>
 
-      {/* GPT/ChatGPT Toggle */}
+      {/* Midjourney/ChatGPT Toggle */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -206,7 +136,19 @@ export default function CardList({
             className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 gap-6 mb-8"
           >
             {displayItems.length > 0 ? (
-              renderItems()
+              displayItems.map((product) => (
+                <motion.div key={product._id}>
+                  <Card
+                    type="product"
+                    _id={product._id}
+                    image={product.image}
+                    long_prompt={product.long_prompt}
+                    short_prompt={product.short_prompt}
+                    image_description={product.image_description}
+                    category={product.category}
+                  />
+                </motion.div>
+              ))
             ) : (
               <motion.div
                 initial={{ opacity: 0 }}
@@ -215,7 +157,7 @@ export default function CardList({
               >
                 <div className="text-6xl mb-4">🔍</div>
                 <h3 className="text-xl font-semibold text-gray-700 mb-2">
-                  No {type} found
+                  No prompts found
                 </h3>
                 <p className="text-gray-500">Try selecting a different option</p>
               </motion.div>
@@ -223,10 +165,10 @@ export default function CardList({
           </motion.div>
 
           {/* Pagination */}
-          {filteredItems.length > 0 && (
+          {items.length > 0 && (
             <div className="mt-12 flex justify-center">
               <PromptPagination
-                products={filteredItems}
+                products={items}
                 itemsPerPage={9}
                 onPageChange={handlePageChange}
               />

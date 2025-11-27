@@ -12,13 +12,13 @@ export default function Home() {
 
       <div className="flex justify-center w-full ">
         <CardList
-          type="products"
+         
           dataUrl="/api/prompts"
           title="Featured Prompts"
           subtitle="Discover premium AI prompts crafted by experts"
         />
       </div>
-      <ToolsSection/>
+      
 
 
     </div>
