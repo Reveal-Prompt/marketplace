@@ -82,7 +82,7 @@ export default function ProductDetail() {
   const currentProduct = product;
 
   const handleCopyPrompt = () => {
-    navigator.clipboard.writeText(currentProduct.short_prompt);
+    navigator.clipboard.writeText(currentProduct.long_prompt);
     setCopiedPrompt(true);
     setTimeout(() => setCopiedPrompt(false), 2000);
   };

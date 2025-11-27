@@ -16,7 +16,7 @@ export default function BackTomarketPlace() {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           whileHover={{ x: -5 }}
-          onClick={() => router.back()}
+          onClick={() => router.push('/')}
           className="flex items-center gap-2 text-gray-600 hover:text-purple-600 transition-colors cursor-pointer"
         >
           <ArrowLeft size={20} />
