@@ -49,7 +49,7 @@ export default function ReviewSection() {
   initial={{ opacity: 0, y: 50 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ delay: 0.4 }}
-  className="mt-16 max-w-7xl mx-auto px-4 py-6"
+  className=" max-w-7xl mx-auto px-4 py-6"
 >
   <h2 className="text-3xl font-bold text-gray-900 mb-8">Customer Reviews</h2>
   

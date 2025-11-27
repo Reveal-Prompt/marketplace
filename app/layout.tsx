@@ -1,19 +1,18 @@
 import type { Metadata } from "next";
-import { Sora } from "next/font/google";
+import { Poppins, Plus_Jakarta_Sans } from "next/font/google";
 
 import "./globals.css";
-import { Banner } from "@/components/sections/Banner";
+import {  HeroSection } from "@/components/sections/HeroSection";
+import Footer from "@/components/features/layout/Footer";
+import { Geist } from 'next/font/google'
+const geist = Geist({
+  subsets: ['latin'],
+})
 
-const geistSans = Sora({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-geist-sans",
-});
-
-const geistMono = Sora({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-geist-mono",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-plus-jakarta",
 });
 
 export const metadata: Metadata = {
@@ -29,10 +28,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
+        className={`${geist.className} ${plusJakartaSans.variable} antialiased font-poppins`}
       >
-        <Banner/>
+        <HeroSection/>
         {children}
+        <Footer/>
       </body>
     </html>
   );
