@@ -1,5 +1,5 @@
 "use client";
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   Pagination,
   PaginationContent,
@@ -10,34 +10,25 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination"
 
-interface PromptPaginationProps<T = any> {
-  products: T[];
-  itemsPerPage?: number;
-  onPageChange?: (page: number, items: T[]) => void;
+interface PromptPaginationProps {
+  totalPages: number;
+  currentPage: number;
+  onPageChange: (page: number) => void;
+  isLoading?: boolean;
 }
 
-export default function PromptPagination<T = any>({
-  products, 
-  itemsPerPage = 9,
-  onPageChange
-}: PromptPaginationProps<T>) {
-  const [currentPage, setCurrentPage] = useState(1);
-  
-  // Reset to page 1 when products array changes (e.g., category filter)
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [products.length]);
-  
-  const totalPages = Math.ceil(products.length / itemsPerPage);
+export default function PromptPagination({
+  totalPages,
+  currentPage,
+  onPageChange,
+  isLoading = false,
+}: PromptPaginationProps) {
   
   const handlePageChange = (page: number) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-      if (onPageChange) {
-        const startIndex = (page - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        onPageChange(page, products.slice(startIndex, endIndex));
-      }
+    if (page >= 1 && page <= totalPages && !isLoading) {
+      onPageChange(page);
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
@@ -89,7 +80,7 @@ export default function PromptPagination<T = any>({
               e.preventDefault();
               handlePageChange(currentPage - 1);
             }}
-            className={currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
+            className={currentPage === 1 || isLoading ? "pointer-events-none opacity-50" : "cursor-pointer"}
           />
         </PaginationItem>
 
@@ -104,7 +95,7 @@ export default function PromptPagination<T = any>({
                   handlePageChange(page as number);
                 }}
                 isActive={currentPage === page}
-                className="cursor-pointer"
+                className={isLoading ? "opacity-50" : "cursor-pointer"}
               >
                 {page}
               </PaginationLink>
@@ -118,7 +109,7 @@ export default function PromptPagination<T = any>({
               e.preventDefault();
               handlePageChange(currentPage + 1);
             }}
-            className={currentPage === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"}
+            className={currentPage === totalPages || isLoading ? "pointer-events-none opacity-50" : "cursor-pointer"}
           />
         </PaginationItem>
       </PaginationContent>

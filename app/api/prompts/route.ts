@@ -5,10 +5,11 @@ export const revalidate = 60;
 
 export async function GET(request: NextRequest) {
   try {
-    const filter = request.nextUrl.searchParams.get("filter") || "latest";
+    const page = request.nextUrl.searchParams.get("page") || "1";
+    const limit = request.nextUrl.searchParams.get("limit") || "9";
     
-    const baseUrl = process.env.BACKEND_URL || "http://localhost:8080";
-    const res = await axios.get(`${baseUrl}/api/prompts?filter=${filter}`);
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
+    const res = await axios.get(`${baseUrl}/api/prompts?page=${page}&limit=${limit}`);
     
     return NextResponse.json(res.data, { status: 200 });
   } catch (error: any) {

@@ -5,9 +5,9 @@ import axios from "axios";
 import Card from "../ui/Card";
 import { motion } from "framer-motion";
 import PromptPagination from "./PromptPagination";
-import Loading from "../ui/Loading";
+import { Skeleton } from "@/components/ui/skeleton";
 
-interface Product {
+interface Prompt {
   _id: number;
   image: {
     type: string;
@@ -31,39 +31,44 @@ export default function CardList({
   title,
   subtitle,
 }: CardListProps) {
-  const [items, setItems] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [items, setItems] = useState<Prompt[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [toggleType, setToggleType] = useState<"Midjourney" | "chatgpt">("Midjourney");
-  const [currentPageItems, setCurrentPageItems] = useState<Product[]>([]);
+  const itemsPerPage = 9;
 
+  // Fetch data when page or toggle changes
   useEffect(() => {
-    axios
-      .get(dataUrl)
-      .then((res) => {
-        const data = res.data.data;
-        setItems(data);
+    const fetchPrompts = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          `/api/prompts?page=${currentPage}&limit=${itemsPerPage}`
+        );
+        
+        setItems(response.data.data);
+        setTotalPages(response.data.totalPages);
+      } catch (err) {
+        console.error("Error fetching products:", err);
+        setItems([]);
+        setTotalPages(0);
+      } finally {
         setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching dataset:", err);
-        setLoading(false);
-      });
-  }, [dataUrl]);
+      }
+    };
 
-  const handlePageChange = (page: number, pageItems: Product[]) => {
-    setCurrentPageItems(pageItems);
+    fetchPrompts();
+  }, [currentPage, toggleType]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
   const handleToggleChange = (newType: "Midjourney" | "chatgpt") => {
     setToggleType(newType);
-    setCurrentPageItems([]);
+    setCurrentPage(1); // Reset to page 1
   };
-
-  useEffect(() => {
-    setCurrentPageItems([]);
-  }, [toggleType, items.length]);
-
-  const displayItems = currentPageItems.length > 0 ? currentPageItems : items.slice(0, 9);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -122,21 +127,49 @@ export default function CardList({
         </div>
       </motion.div>
 
-      {/* Loading */}
-      {loading && <Loading />}
-
-      {/* Cards Grid */}
-      {!loading && (
+      {/* Cards Grid with Skeletons */}
+      {loading ? (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 gap-6 mb-8"
+        >
+          {[...Array(itemsPerPage)].map((_, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-2xl overflow-hidden shadow-lg"
+            >
+              {/* Image Skeleton */}
+              <Skeleton className="w-full h-64" />
+              
+              {/* Content Skeleton */}
+              <div className="p-6 space-y-4">
+                {/* Category Badge */}
+                <Skeleton className="h-6 w-24 rounded-full" />
+                
+                {/* Title Lines */}
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-3/4" />
+                  <Skeleton className="h-4 w-1/2" />
+                </div>
+                
+                {/* Button */}
+                <Skeleton className="h-10 w-full mt-4 rounded-lg" />
+              </div>
+            </div>
+          ))}
+        </motion.div>
+      ) : (
         <>
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            key={toggleType}
+            key={`${toggleType}-${currentPage}`}
             className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 gap-6 mb-8"
           >
-            {displayItems.length > 0 ? (
-              displayItems.map((product) => (
+            {items.length > 0 ? (
+              items.map((product) => (
                 <motion.div key={product._id}>
                   <Card
                     type="product"
@@ -165,12 +198,13 @@ export default function CardList({
           </motion.div>
 
           {/* Pagination */}
-          {items.length > 0 && (
+          {totalPages > 1 && (
             <div className="mt-12 flex justify-center">
               <PromptPagination
-                products={items}
-                itemsPerPage={9}
+                totalPages={totalPages}
+                currentPage={currentPage}
                 onPageChange={handlePageChange}
+                isLoading={loading}
               />
             </div>
           )}

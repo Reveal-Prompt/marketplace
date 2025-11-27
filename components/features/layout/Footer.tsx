@@ -17,12 +17,12 @@ export default function Footer() {
     ],
     company: [
       { name: 'About Us', href: '/about' },
-      { name: 'Contact Us', href: '/contact' },
-      { name: 'Careers', href: '/careers' },
+     
+     
     ],
     legal: [
-      { name: 'Privacy Policy', href: '/privacy' },
-      { name: 'Terms of Service', href: '/terms' },
+      { name: 'Privacy Policy', href: '/' },
+      { name: 'Terms of Service', href: '/' },
     ]
   };
 
@@ -35,7 +35,7 @@ export default function Footer() {
   const linkClass = "text-gray-400 hover:text-[#FF77E9] transition-all duration-200 hover:translate-x-1 inline-block";
 
   return (
-    <footer className="relative w-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-300 overflow-hidden">
+    <footer className="relative w-full bg-black text-gray-300 overflow-hidden">
 
       {/* Logo Background */}
       <motion.div 

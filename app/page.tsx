@@ -1,7 +1,4 @@
-
-import Search from "@/components/features/search/Search";
 import CardList from "@/components/features/CardList";
-import ToolsSection from "@/components/sections/ToolsSection";
 
 
 export default function Home() {
