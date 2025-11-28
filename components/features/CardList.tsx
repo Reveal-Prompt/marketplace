@@ -42,9 +42,10 @@ export default function CardList({
   useEffect(() => {
     const fetchPrompts = async () => {
       try {
+        let timeout = setTimeout(() => setLoading(true), 300)
         setLoading(true);
         const response = await axios.get(
-          `/api/prompts?page=${currentPage}&limit=${itemsPerPage}`
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/prompts?page=${currentPage}&limit=${itemsPerPage}`
         );
         
         setItems(response.data.data);

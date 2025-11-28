@@ -39,7 +39,7 @@ export default function ProductDetail() {
     if (!productId) return;
 
     axios
-      .get(`/api/prompts/${productId}`)
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/prompts/${productId}`)
       .then((response) => {
         setProduct({
           ...response.data,

@@ -38,7 +38,7 @@ export function HeroSection() {
       try {
         setLoading(true);
         const response = await axios.get<{ data: Prompt[] }>(
-          `/api/prompts?limit=${itemsPerPage}`
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/prompts?limit=${itemsPerPage}`
         );
         setItems(response.data.data ?? []);
       } catch (err) {
@@ -54,6 +54,7 @@ export function HeroSection() {
 
   return (
     <motion.div
+      key={pathname}
       initial={{ height: 500, opacity: 1 }}
       animate={{ height: isNotMarketPlace ? "auto" : 90 }}
       transition={{ duration: 0.8, ease: "easeInOut" }}

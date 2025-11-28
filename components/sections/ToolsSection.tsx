@@ -54,7 +54,7 @@ export default function ToolsSection() {
             </span>
 
             <Link
-              href={tool.href}
+              href={''}
               className="mt-4 block text-sm font-medium text-indigo-600 hover:underline"
             >
               Learn More →
